@@ -14,7 +14,7 @@ interface StatisticCard {
   },
   deaths: {
     new: string,
-    totals: number,
+    totals: number, 
   },
   tests : {
     "1M_pop": string,
@@ -32,15 +32,18 @@ function DataTable({ data }: any) {
   return (
     <Container
       maxWidth="lg"
-      sx={{ backgroundColor: "#e9e9e9", p: 2, borderRadius: "2rem" }}
+      sx={{ backgroundColor: "#fff", p: 2, borderRadius: "2rem" }}
     >
-      <Paper sx={{ display: "flex" }}>
+      <Paper sx={{ display: "flex", elevation: 2 }}>
         <Typography sx={{ color: "#00f", px: 1, width: '25%' }}>Country</Typography> |
-        <Typography sx={{}}>Total Cases</Typography>
+        <Typography sx={{width: '15rem'}}>Total Cases</Typography>
+        <Typography sx={{width: '15rem'}}>Population</Typography>
+        <Typography>New cases</Typography>
       </Paper>
       {data.map((statistic: StatisticCard) => (
         <>
           <TableItem key={statistic.country} {...statistic} />
+
         </>
       ))}
     </Container>
@@ -51,7 +54,9 @@ function TableItem({ population, country, cases }: StatisticCard) {
   return (
     <Paper sx={{ m: 0.5, display: "flex" }}>
       <Typography sx={{ color: "#00f", py: 1, pl: 2, width: '25%' }}>{country}</Typography>{" "}
-      |<Typography sx={{pl: 2}}>{cases.total}</Typography>
+      |<Typography sx={{pl: 2, width: '15rem'}}>{cases.total}</Typography>
+      <Typography sx={{ width: '15rem'}}>{population}</Typography>
+      <Typography>{cases.new}</Typography> 
     </Paper>
   );
 }
