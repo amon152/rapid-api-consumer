@@ -1,6 +1,6 @@
 import { SearchRounded } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Container, Box, TextField, Select, Autocomplete, Button, MenuItem, SelectChangeEvent } from "@mui/material";
+import { Container, Box, TextField, Select, Autocomplete, Button, MenuItem, SelectChangeEvent, InputLabel, Typography } from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { countries } from "../../../utils/Countries";
@@ -32,20 +32,20 @@ function SearchBar({ onSubmission }: Props) {
             p: 1,
             borderRadius: "1rem",
             display: "flex",
-            flexDirection: { xs: "column", sm: "row", md: "row" },
+            flexDirection:"column", 
             position: "relative",
             zIndex: 2,
           }}
         >
+              <Typography>Search for country statistics</Typography>
               <Select
-                labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
                 value={country}
                 onChange={handleChange}
                 autoWidth
                 label="Choose a country"
                 variant="standard"
-                sx={{ width: { sm: '35%', md: '90%' }, mb: 2, mx: 'auto' }}
+                sx={{ width: { sm: '35%', md: '90%' }, mb: 2, mx: 'auto', backgroundColor: '#fff' }}
               >
                 {countries.map((option) => (
                   <MenuItem key={option.label} value={option.label || ''}>
