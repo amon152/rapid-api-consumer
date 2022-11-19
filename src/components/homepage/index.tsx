@@ -6,13 +6,14 @@ import SearchBar from "./SearchBar";
 
 interface Props {
     data: any
+    onSubmission(data: any): void;
 }
 
-function Homepage({data}: Props) {
+function Homepage({data, onSubmission}: Props) {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl" sx={{backgroundColor: '#fff'}}>
       <Chart />
-      <SearchBar />
+      <SearchBar onSubmission={onSubmission}/>
       <DataTable data={data}/>
     </Container>
   );

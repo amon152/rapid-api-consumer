@@ -24,27 +24,30 @@ function Chart() {
   }, [setChartData])
 
   console.log(chartData)
-  const cases = chartData?.map((data: any) => ({ new: data.cases.new, deaths: data.deaths.new, time: (() => new Date(data.time).getUTCHours())() }))
+  const cases = chartData?.map((data: any) => (
+    { 'new cases': data.cases.new, deaths: data.deaths.new, 
+      time: (() => new Date(data.time).toLocaleTimeString('en-GB', { hour: '2-digit' }))() })).sort((a: any, b: any)=> {
+        return a.time - b.time;
+    })
   console.log(cases)
 
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth='xl'>
       {chartData ? (
-          <LineChart
-            width={1200}
-            height={700}
-            data={cases}
-            margin={{ top: 25, right: 20, left: 10, bottom: 5 }}
-          >
-            <XAxis dataKey='time' />
-            <YAxis type="number" domain={[0, 120000]}/>
-            {/* <Tooltip /> */}
-            <Legend />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Line type="monotone" dataKey='new' stroke="#ffa000" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="deaths" stroke="#38ff08" />
-            <Line type="monotone" dataKey="lives" stroke="#38ff08" />
-          </LineChart>
+        <LineChart
+          width={1440}
+          height={500}
+          data={cases}
+          margin={{ top: 50, right: 20, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey='time' scale={cases.time} />
+          <YAxis type="number" domain={[0, 120000]} />
+          <Tooltip />
+          <Legend />
+          <CartesianGrid strokeDasharray="3 3" stroke="#0004" />
+          <Line type="monotone" dataKey='new cases' stroke="#ffa000" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="deaths" stroke="#38ff08" />
+        </LineChart>
       ) : (
         <div> hey</div>
       )}
